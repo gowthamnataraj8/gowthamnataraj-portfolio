@@ -1,29 +1,33 @@
- <!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Junior Data Analyst in London skilled in SQL, Python, Power BI, Tableau, Excel, Data Analytics, Dashboard Development and Business Intelligence. Open to Data Analyst opportunities across the UK." />
   <meta name="robots" content="index, follow" />
-  <title>Gowtham Nataraj | Junior Data Analyst Portfolio</title>
+  <title>Gowtham Nataraj | Data Analyst Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     :root {
       color-scheme: dark;
-      --bg: #030712;
-      --surface: #111827;
-      --surface-soft: rgba(17, 24, 39, 0.75);
-      --text: #ffffff;
-      --muted: #94a3b8;
+      --bg: #050816;
+      --surface: #0b1220;
+      --surface-soft: rgba(11, 18, 28, 0.70);
+      --text: #FFFFFF;
+      --muted: #94A3B8;
       --muted-strong: #cbd5e1;
-      --primary: #7c3aed;
-      --secondary: #06b6d4;
+      --blue: #3B82F6;
+      --purple: #8B5CF6;
+      --cyan: #06B6D4;
+      --primary: var(--blue);
+      --secondary: var(--purple);
+      --accent: var(--cyan);
       --success: #22c55e;
-      --border: rgba(124, 58, 237, 0.3);
-      --shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
-      --radius: 28px;
+      --border: rgba(139, 92, 246, 0.18);
+      --shadow: 0 30px 80px rgba(3, 7, 18, 0.6);
+      --radius: 22px;
     }
 
     * {
@@ -379,28 +383,65 @@
     }
 
     .stat {
-      padding: 18px 16px;
-      border-radius: 22px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255,255,255,0.08);
+      padding: 20px 18px;
+      border-radius: 26px;
+      background: linear-gradient(135deg, rgba(59,130,246,0.18), rgba(139,92,246,0.16));
+      border: 1.5px solid rgba(59,130,246,0.38);
       text-align: center;
+      box-shadow: 0 8px 32px rgba(59,130,246,0.18), inset 0 0 20px rgba(139,92,246,0.08);
+      backdrop-filter: blur(12px);
+      transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease, background 0.28s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(6,182,212,0.16), transparent 60%);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.28s ease;
+    }
+
+    .stat:hover {
+      transform: translateY(-4px);
+      border-color: rgba(59,130,246,0.65);
+      box-shadow: 0 14px 48px rgba(59,130,246,0.32), inset 0 0 24px rgba(139,92,246,0.14);
+      background: linear-gradient(135deg, rgba(59,130,246,0.24), rgba(139,92,246,0.22));
+    }
+
+    .stat:hover::before {
+      opacity: 1;
     }
 
     .stat strong {
       display: block;
-      font-size: 1.15rem;
-      color: var(--text);
+      font-size: 1.32rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -0.02em;
+      position: relative;
+      z-index: 1;
     }
 
     .stat span {
       display: block;
-      margin-top: 6px;
-      color: var(--muted);
-      font-size: 0.94rem;
+      margin-top: 8px;
+      color: var(--muted-strong);
+      font-size: 0.92rem;
+      font-weight: 500;
+      position: relative;
+      z-index: 1;
     }
 
     .section {
       margin-top: 80px;
+      scroll-margin-top: 92px;
     }
 
     .section-title {
@@ -520,6 +561,28 @@
       transform: translateY(-2px);
       background: rgba(255, 255, 255, 0.08);
       border-color: rgba(124, 58, 237, 0.2);
+    }
+
+    /* Accessibility & focus styles */
+    :focus-visible {
+      outline: 3px solid rgba(6, 182, 212, 0.18);
+      outline-offset: 4px;
+      border-radius: 8px;
+    }
+
+    .btn:focus-visible {
+      box-shadow: 0 8px 30px rgba(124, 58, 237, 0.18);
+      transform: translateY(-2px);
+    }
+
+    .skill-pill:focus-visible {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.10);
+      border-color: rgba(6,182,212,0.22);
+    }
+
+    .card {
+      transition: transform 0.28s cubic-bezier(.2,.9,.2,1), box-shadow 0.28s ease, border-color 0.28s ease;
     }
 
     .timeline {
@@ -718,9 +781,179 @@
         align-items: flex-start;
       }
     }
+
+    /* Page-load flash overlay and hero SVG accent */
+    .page-flash {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.06) 30%, transparent 60%);
+      pointer-events: none;
+      z-index: 99999;
+      opacity: 0;
+      transition: opacity 0.9s cubic-bezier(.2,.9,.2,1), transform 0.9s ease;
+      transform: scale(1.02);
+    }
+
+    .page-flash.play {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .hero-graphic {
+      width: 160px;
+      height: 120px;
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 12px;
+      filter: drop-shadow(0 12px 30px rgba(224,231,255,0.2));
+      transform-origin: center;
+      opacity: 0.98;
+    }
+
+    .hero-graphic .pulse { transform-origin: center; opacity: 0.85; }
+
+    .hero-graphic .pulse.big {
+      animation: pulse 2.6s ease-in-out infinite;
+    }
+
+    .hero-graphic .pulse.small {
+      animation: pulse 1.6s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.88); opacity: 0.65; }
+      50% { transform: scale(1.08); opacity: 0.95; }
+      100% { transform: scale(0.88); opacity: 0.65; }
+    }
+
+    body.site-loaded .hero-title { animation: titleGlow 2.4s ease 0.18s both; }
+    @keyframes titleGlow {
+      0% { filter: drop-shadow(0 0 0 rgba(124,58,237,0)); transform: translateY(0); }
+      40% { filter: drop-shadow(0 18px 40px rgba(124,58,237,0.18)); transform: translateY(-4px); }
+      100% { filter: drop-shadow(0 8px 26px rgba(124,58,237,0.12)); transform: translateY(0); }
+    }
+    /* Subtle halo, blinking accents and section glow */
+    .hero-title {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-title::after {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: -6px;
+      right: -6px;
+      bottom: -6px;
+      border-radius: 12px;
+      pointer-events: none;
+      box-shadow: 0 0 32px rgba(124,58,237,0.06), 0 0 64px rgba(6,182,212,0.04);
+      opacity: 0;
+      transition: opacity 420ms ease, transform 420ms ease;
+      transform: scale(0.98);
+    }
+
+    .hero-title.in-view::after,
+    .hero-title.glow::after {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .hero-title .accent-dot {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      right: -10px;
+      top: 10%;
+      background: linear-gradient(90deg,var(--primary),var(--accent));
+      box-shadow: 0 0 18px rgba(59,130,246,0.28), 0 0 28px rgba(6,182,212,0.12);
+      opacity: 0.9;
+      animation: blink 2.6s infinite ease-in-out;
+    }
+
+    @keyframes blink {
+      0% { transform: scale(0.8); opacity: 0.45; }
+      50% { transform: scale(1.1); opacity: 1; }
+      100% { transform: scale(0.8); opacity: 0.45; }
+    }
+
+    .section-title.in-view h2,
+    .section-title.glow h2 {
+      text-shadow: 0 10px 30px rgba(59,130,246,0.08), 0 6px 18px rgba(139,92,246,0.06);
+      transition: text-shadow 480ms ease, transform 480ms ease;
+      transform: translateY(-2px);
+    }
+
+    .nav-links a { position: relative; }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%) translateY(6px);
+      bottom: -6px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: transparent;
+      box-shadow: 0 0 18px rgba(59,130,246,0.06), 0 0 34px rgba(139,92,246,0.04);
+      opacity: 0;
+      transition: opacity 260ms ease, transform 260ms ease;
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a:focus-visible::after,
+    .nav-links a.active::after {
+      opacity: 0.98;
+      transform: translateX(-50%) translateY(0);
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+    }
+
+    .nav-links a.active {
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    /* Respect user preferences */
+    @media (prefers-reduced-motion: reduce) {
+      .pulse, .hero-graphic .pulse, .hero-title::after, .hero-title .accent-dot, .section-title h2, .nav-links a::after {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+
+    /* Mobile / performance: tone down effects */
+    @media (max-width: 680px) {
+      .hero-title::after, .hero-title .accent-dot, .nav-links a::after { display: none; }
+      .hero-graphic .pulse { animation: none; }
+    }
+
+    /* Background canvas for subtle particles */
+    .bg-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.95;
+    }
+
+    /* Sparkline micro-interactions */
+    .sparkline { width: 120px; height: 28px; display: block; margin-top: 8px; }
+    .sparkline polyline { fill: none; stroke: var(--primary); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; opacity: 0.95; transition: stroke-dashoffset 900ms cubic-bezier(.2,.9,.2,1); }
+    .card .sparkline { opacity: 0.98; }
+    .card .sparkline.hidden polyline { stroke-dashoffset: 1000; }
+    .card .sparkline.visible polyline { stroke-dashoffset: 0; }
+
+    @media (max-width: 680px) {
+      .sparkline { display: none; }
+    }
   </style>
 </head>
 <body>
+  <canvas id="bgCanvas" class="bg-canvas" aria-hidden="true"></canvas>
+  <div class="page-flash" aria-hidden="true"></div>
   <div class="page">
     <header>
       <div class="nav-inner">
@@ -728,7 +961,6 @@
         <nav class="nav-links" aria-label="Primary">
           <a href="#about">About</a>
           <a href="#skills">Skills</a>
-          <a href="#projects">Projects</a>
           <a href="#experience">Experience</a>
           <a href="#contact">Contact</a>
         </nav>
@@ -739,6 +971,27 @@
       <div class="hero-copy reveal">
         <span class="eyebrow">Available for Hire • Open to Work</span>
         <h1 class="hero-title">Gowtham Nataraj</h1>
+        <span class="hero-graphic" aria-hidden="true">
+          <svg viewBox="0 0 160 120" width="160" height="120" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="starGrad" x1="0" x2="1">
+                <stop offset="0%" stop-color="#E0E7FF" stop-opacity="1"/>
+                <stop offset="100%" stop-color="#F3E8FF" stop-opacity="1"/>
+              </linearGradient>
+            </defs>
+            <g fill="none" fill-rule="evenodd">
+              <g class="pulse big" transform="translate(48,60)" opacity="0.8">
+                <polygon points="0,-8 2.4,-2.4 8,-0.8 3.2,3.2 4.8,9.2 0,5.6 -4.8,9.2 -3.2,3.2 -8,-0.8 -2.4,-2.4" fill="url(#starGrad)"/>
+              </g>
+              <g class="pulse small" transform="translate(112,44)" opacity="0.7">
+                <polygon points="0,-6 1.8,-1.8 6,-0.6 2.4,2.4 3.6,6.9 0,4.2 -3.6,6.9 -2.4,2.4 -6,-0.6 -1.8,-1.8" fill="url(#starGrad)"/>
+              </g>
+              <g transform="translate(28,30)" opacity="0.5">
+                <polygon points="0,-4 1.2,-0.9 4,-0.3 1.2,1.2 1.8,3.5 0,2.1 -1.8,3.5 -1.2,1.2 -4,-0.3 -1.2,-0.9" fill="url(#starGrad)"/>
+              </g>
+            </g>
+          </svg>
+        </span>
         <p class="hero-subtitle">Junior Data Analyst with hands-on experience in Python, SQL, Power BI, Tableau, and Excel. Experienced in data cleaning, dashboard development, exploratory data analysis, and transforming business data into actionable insights. Open to Data Analyst opportunities across the UK.</p>
         <div class="hero-actions">
           <a href="gowtham-nataraj-resume.pdf" class="btn btn-primary" download>Download CV</a>
@@ -796,19 +1049,19 @@
         <h2>Skills</h2>
       </div>
       <div class="skills-grid">
-        <div class="skill-pill">SQL</div>
-        <div class="skill-pill">Python</div>
-        <div class="skill-pill">Power BI</div>
-        <div class="skill-pill">Tableau</div>
-        <div class="skill-pill">Excel</div>
-        <div class="skill-pill">Pandas</div>
-        <div class="skill-pill">NumPy</div>
-        <div class="skill-pill">Data Cleaning</div>
-        <div class="skill-pill">Data Visualization</div>
-        <div class="skill-pill">EDA</div>
-        <div class="skill-pill">KPI Reporting</div>
-        <div class="skill-pill">PostgreSQL</div>
-        <div class="skill-pill">MySQL</div>
+        <div class="skill-pill" tabindex="0">SQL</div>
+        <div class="skill-pill" tabindex="0">Python</div>
+        <div class="skill-pill" tabindex="0">Power BI</div>
+        <div class="skill-pill" tabindex="0">Tableau</div>
+        <div class="skill-pill" tabindex="0">Excel</div>
+        <div class="skill-pill" tabindex="0">Pandas</div>
+        <div class="skill-pill" tabindex="0">NumPy</div>
+        <div class="skill-pill" tabindex="0">Data Cleaning</div>
+        <div class="skill-pill" tabindex="0">Data Visualization</div>
+        <div class="skill-pill" tabindex="0">EDA</div>
+        <div class="skill-pill" tabindex="0">KPI Reporting</div>
+        <div class="skill-pill" tabindex="0">PostgreSQL</div>
+        <div class="skill-pill" tabindex="0">MySQL</div>
       </div>
     </section>
 
@@ -833,47 +1086,6 @@
           <div class="progress-panel" id="pl300ProgressPanel">
             <p>Your Power BI PL-300 certification is currently in progress. Once completed, replace this section with the certificate image and a verification link.</p>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section reveal" id="projects">
-      <div class="section-title">
-        <h2>Projects</h2>
-      </div>
-      <div class="glass-grid">
-        <div class="card">
-          <h3>Impact of Cost Structure and Debt Strategy on Corporate Profitability</h3>
-          <p>Analysed SEC financial data using Python and SQL to identify how cost structure and debt strategy influence corporate profitability.</p>
-          <ul class="card-list">
-            <li>Data Cleaning and Transformation</li>
-            <li>Exploratory Data Analysis</li>
-            <li>SQL Queries and Data Extraction</li>
-            <li>Financial Trend Analysis</li>
-            <li>Business Insights and Reporting</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h3>Banking and Financial Risk Analysis using SQL</h3>
-          <p>Analysed banking and financial datasets using SQL to identify fraud trends, customer spending patterns, and loan behaviour insights.</p>
-          <ul class="card-list">
-            <li>Advanced SQL Queries</li>
-            <li>Fraud Detection Analysis</li>
-            <li>Customer Spending Insights</li>
-            <li>Loan Behaviour Analysis</li>
-            <li>Risk Assessment Reporting</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h3>Power BI KPI Dashboard</h3>
-          <p>Developed interactive Power BI dashboards to monitor KPIs and business performance.</p>
-          <ul class="card-list">
-            <li>KPI Monitoring</li>
-            <li>Dashboard Design</li>
-            <li>Data Visualization</li>
-            <li>Business Reporting</li>
-            <li>Interactive Analytics</li>
-          </ul>
         </div>
       </div>
     </section>
@@ -949,35 +1161,217 @@
   </div>
 
   <script>
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.15 });
-    reveals.forEach(reveal => observer.observe(reveal));
-
+    // Toggle visibility helpers
     function toggleCertificate() {
       const panel = document.getElementById('googleCertificatePanel');
-      const button = document.querySelector('#googleCertificatePanel').previousElementSibling;
+      const button = panel ? panel.previousElementSibling : null;
       if (!panel || !button) return;
       panel.classList.toggle('visible');
       button.textContent = panel.classList.contains('visible') ? 'Hide certificate' : 'View certificate';
-      if (panel.classList.contains('visible')) {
-        panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      if (panel.classList.contains('visible')) panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     function toggleProgress() {
       const panel = document.getElementById('pl300ProgressPanel');
-      const button = document.querySelector('#pl300ProgressPanel').previousElementSibling;
+      const button = panel ? panel.previousElementSibling : null;
       if (!panel || !button) return;
       panel.classList.toggle('visible');
       button.textContent = panel.classList.contains('visible') ? 'Hide progress' : 'View progress';
-      if (panel.classList.contains('visible')) {
-        panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (panel.classList.contains('visible')) panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // IntersectionObserver: reveal + add subtle 'in-view' glow and update nav active state
+    (function () {
+      const reveals = document.querySelectorAll('.reveal');
+      const sections = Array.from(document.querySelectorAll('section[id]'));
+      const navLinks = Array.from(document.querySelectorAll('.nav-links a'));
+
+      // Ensure hero title has an accent dot for blinking light
+      const heroTitle = document.querySelector('.hero-title');
+      if (heroTitle && !heroTitle.querySelector('.accent-dot')) {
+        const dot = document.createElement('span');
+        dot.className = 'accent-dot';
+        heroTitle.style.position = 'relative';
+        heroTitle.appendChild(dot);
+      }
+
+      const prefsReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const el = entry.target;
+          if (entry.isIntersecting) {
+            el.classList.add('visible');
+            // add in-view/glow to the section title if present
+            const title = el.querySelector('.section-title') || el.querySelector('.hero-title');
+            if (title) title.classList.add('in-view');
+            // update nav active state
+            const id = el.id;
+            if (id) {
+              navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === `#${id}`));
+            }
+          } else {
+            // keep visible for a short time but remove in-view when out
+            const title = el.querySelector('.section-title') || el.querySelector('.hero-title');
+            if (title) title.classList.remove('in-view');
+          }
+        });
+      }, { threshold: 0.22 });
+
+      // Observe reveal blocks and section containers
+      reveals.forEach(r => io.observe(r));
+      sections.forEach(s => io.observe(s));
+
+      // If reduced motion is requested, tone down animations
+      if (prefsReduced) {
+        document.documentElement.classList.add('reduced-motion');
+      }
+    })();
+
+    // Page-load animation: flash and site-loaded class
+    window.addEventListener('load', () => {
+      try {
+        const flash = document.querySelector('.page-flash');
+        if (flash) {
+          flash.classList.add('play');
+          // fade out after brief moment
+          setTimeout(() => {
+            flash.style.transition = 'opacity 0.9s ease, transform 0.9s ease';
+            flash.style.opacity = '0';
+            flash.style.transform = 'scale(1.06)';
+            setTimeout(() => flash.remove(), 1000);
+          }, 420);
+        }
+        document.body.classList.add('site-loaded');
+
+        // Initialize particles and sparklines after load
+        initParticles();
+        initSparklines();
+      } catch (e) {
+        // fail silently
+        console.warn('load animation error', e);
+      }
+    });
+
+    /* Particle background - lightweight and tuned for mobile */
+    function initParticles() {
+      const canvas = document.getElementById('bgCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let dpr = Math.max(1, window.devicePixelRatio || 1);
+      let w = window.innerWidth;
+      let h = window.innerHeight;
+      let particles = [];
+      let running = true;
+      const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function resize() {
+        dpr = Math.max(1, window.devicePixelRatio || 1);
+        w = window.innerWidth;
+        h = window.innerHeight;
+        canvas.width = Math.round(w * dpr);
+        canvas.height = Math.round(h * dpr);
+        canvas.style.width = w + 'px';
+        canvas.style.height = h + 'px';
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        const base = w > 1200 ? 60 : (w > 800 ? 36 : 18);
+        const count = Math.round(base * (reduced ? 0.35 : 1));
+        particles.length = 0;
+        for (let i = 0; i < count; i++) {
+          particles.push(createParticle());
+        }
+      }
+
+      function createParticle() {
+        const size = Math.random() * 2.8 + 0.6;
+        return {
+          x: Math.random() * w,
+          y: Math.random() * h,
+          r: size,
+          vx: (Math.random() - 0.5) * 0.3,
+          vy: (Math.random() - 0.5) * 0.3,
+          alpha: 0.06 + Math.random() * 0.14,
+          hue: 220 + Math.random() * 120
+        };
+      }
+
+      function step() {
+        if (!running) return;
+        ctx.clearRect(0, 0, w, h);
+        // soft gradient wash
+        const grad = ctx.createLinearGradient(0, 0, w, h);
+        grad.addColorStop(0, 'rgba(12,18,34,0.08)');
+        grad.addColorStop(1, 'rgba(4,8,16,0.08)');
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, w, h);
+
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.x < -20) p.x = w + 20;
+          if (p.x > w + 20) p.x = -20;
+          if (p.y < -20) p.y = h + 20;
+          if (p.y > h + 20) p.y = -20;
+
+          ctx.beginPath();
+          ctx.globalAlpha = p.alpha;
+          ctx.fillStyle = `hsl(${p.hue} 80% 60%)`;
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        ctx.globalAlpha = 1;
+        if (!reduced) requestAnimationFrame(step);
+      }
+
+      // Pause animation when not visible
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) running = false; else { running = true; requestAnimationFrame(step); }
+      });
+
+      window.addEventListener('resize', () => { resize(); });
+
+      resize();
+      if (!reduced) requestAnimationFrame(step);
+    }
+
+    /* Sparklines: animate on card reveal */
+    function initSparklines() {
+      const cards = Array.from(document.querySelectorAll('.card'));
+      const sparkObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            animateSpark(entry.target);
+            sparkObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.24 });
+
+      cards.forEach(card => {
+        const svg = card.querySelector('.sparkline');
+        if (!svg) return;
+        const poly = svg.querySelector('polyline');
+        if (!poly) return;
+        const length = poly.getTotalLength();
+        poly.style.strokeDasharray = length + ' ' + length;
+        poly.style.strokeDashoffset = length;
+        sparkObserver.observe(card);
+      });
+
+      function animateSpark(card) {
+        const svg = card.querySelector('.sparkline');
+        if (!svg) return;
+        const poly = svg.querySelector('polyline');
+        if (!poly) return;
+        const length = poly.getTotalLength();
+        svg.classList.remove('hidden');
+        svg.classList.add('visible');
+        // trigger reflow then animate
+        void poly.getBBox();
+        poly.style.transition = 'stroke-dashoffset 900ms cubic-bezier(.2,.9,.2,1)';
+        poly.style.strokeDashoffset = '0';
       }
     }
   </script>
