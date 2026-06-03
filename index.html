@@ -240,6 +240,48 @@
       transform: translateY(-2px);
     }
 
+    .certificate-panel,
+    .progress-panel {
+      display: none;
+      margin-top: 24px;
+      padding: 24px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(124, 58, 237, 0.18);
+      border-radius: 28px;
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.22);
+      backdrop-filter: blur(24px);
+    }
+
+    .certificate-panel.visible,
+    .progress-panel.visible {
+      display: block;
+    }
+
+    .certificate-panel img {
+      width: 100%;
+      max-width: 760px;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.12);
+      display: block;
+      margin-top: 18px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.22);
+    }
+
+    .certificate-panel a,
+    .progress-panel a {
+      display: inline-flex;
+      margin-top: 18px;
+      color: var(--secondary);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .progress-panel p {
+      color: var(--muted-strong);
+      line-height: 1.8;
+      margin-top: 10px;
+    }
+
     .btn-icon {
       min-width: 54px;
       width: 54px;
@@ -778,12 +820,19 @@
         <div class="card">
           <h3>Google Data Analytics Professional Certificate</h3>
           <p>Completed comprehensive analytics training covering data cleaning, visualization, and storytelling.</p>
-          <p>Open the certificate viewer to see the full image and verification link.</p>
-          <a href="certificate.html" class="btn btn-secondary view-certificate-btn" target="_blank" rel="noopener noreferrer">View certificate</a>
+          <button class="btn btn-secondary view-certificate-btn" type="button" onclick="toggleCertificate()">View certificate</button>
+          <div class="certificate-panel" id="googleCertificatePanel">
+            <a href="https://coursera.org/share/49ad5567deda6a9efa2c98e6bcc61615" target="_blank" rel="noopener noreferrer">Verify certificate on Coursera</a>
+            <img src="Google_certificate.png" alt="Google Data Analytics certificate" loading="lazy" />
+          </div>
         </div>
         <div class="card">
           <h3>Microsoft Power BI Data Analyst (PL-300) - In Progress</h3>
           <p>Advanced skills in Power BI modelling, DAX, visual reporting, and self-service analytics.</p>
+          <button class="btn btn-secondary view-certificate-btn" type="button" onclick="toggleProgress()">View progress</button>
+          <div class="progress-panel" id="pl300ProgressPanel">
+            <p>Your Power BI PL-300 certification is currently in progress. Once completed, replace this section with the certificate image and a verification link.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -909,6 +958,28 @@
       });
     }, { threshold: 0.15 });
     reveals.forEach(reveal => observer.observe(reveal));
+
+    function toggleCertificate() {
+      const panel = document.getElementById('googleCertificatePanel');
+      const button = document.querySelector('#googleCertificatePanel').previousElementSibling;
+      if (!panel || !button) return;
+      panel.classList.toggle('visible');
+      button.textContent = panel.classList.contains('visible') ? 'Hide certificate' : 'View certificate';
+      if (panel.classList.contains('visible')) {
+        panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    function toggleProgress() {
+      const panel = document.getElementById('pl300ProgressPanel');
+      const button = document.querySelector('#pl300ProgressPanel').previousElementSibling;
+      if (!panel || !button) return;
+      panel.classList.toggle('visible');
+      button.textContent = panel.classList.contains('visible') ? 'Hide progress' : 'View progress';
+      if (panel.classList.contains('visible')) {
+        panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
   </script>
 </body>
 </html>
